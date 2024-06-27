@@ -17,7 +17,7 @@
        <!-- Description Column -->
        <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef> Description </th>
-        <td mat-cell *matCellDef="let event"> {{ event.descritpion }} </td>
+        <td mat-cell *matCellDef="let event"> {{ event.description }} </td>
       </ng-container>
   
       <!-- Start Date Column -->
@@ -49,8 +49,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let event">
-          <button mat-button *ngIf="isAdmin()" (click)="editEvent(event.id)">Edit</button>
-          <button mat-button *ngIf="isAdmin()" (click)="deleteEvent(event.id)">Delete</button>
+          <button mat-button *ngIf="isContributor()" (click)="Process(event.id)">Proccess</button>
         </td>
       </ng-container>
   

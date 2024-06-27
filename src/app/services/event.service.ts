@@ -12,23 +12,12 @@ export class EventService {
 
   constructor(private http: HttpClient) { }
 
-  getEvents(): Observable<Event[]> {
+  getEvents(): Observable<any> {
     return this.http.get<Event[]>(this.apiUrl);
   }
 
-  getEventById(id: number): Observable<Event> {
-    return this.http.get<Event>(`${this.apiUrl}/${id}`);
-  }
+  processEvent(id : string) : Observable<any> {
+    return this.http.post<Event[]>(`${this.apiUrl}/process/${id}`, null);
 
-  createEvent(event: Event): Observable<Event> {
-    return this.http.post<Event>(this.apiUrl, event);
-  }
-
-  updateEvent(event: Event): Observable<Event> {
-    return this.http.put<Event>(`${this.apiUrl}/${event.id}`, event);
-  }
-
-  deleteEvent(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

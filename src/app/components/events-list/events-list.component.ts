@@ -19,17 +19,21 @@ export class EventsListComponent implements OnInit {
 
   loadEvents() {
     this.eventService.getEvents().subscribe(events => {
-      this.events = events;
+      this.events = events.data;
     });
   }
 
-  isAdmin(): boolean {
+  isContributor(): boolean {
     // Implement your logic to check if user is an admin
     return true; // Placeholder for demo
   }
 
-  editEvent(id: number) {
+  Process(id: string) {
     // Navigation or logic to edit the event
+    this.eventService.processEvent(id).subscribe(response => {
+      alert(response.message);
+      this.loadEvents();
+    })
   }
 
   deleteEvent(id: number) {
