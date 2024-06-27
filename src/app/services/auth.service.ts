@@ -16,7 +16,7 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null>;
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   public currentUser: Observable<User | null>;
-  private baseUrl = 'https://localhost:7279/api';  // Update with your API endpoint
+  private baseUrl = 'https://localhost:12001/api';  // Update with your API endpoint
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
@@ -27,13 +27,13 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  login(username: string, password: string): Observable<User> {
+  login(email: string, password: string): Observable<User> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin' : '*'
     });
 
-    return this.http.post<User>(`${this.baseUrl}/account/login`, { username, password }, { headers: headers })
+    return this.http.post<User>(`${this.baseUrl}/account/login`, { email, password }, { headers: headers })
       .pipe(
         map(user => {
           // Store user details and jwt token in local storage or any other place
@@ -58,11 +58,19 @@ export class AuthService {
   isLoggedIn(): Observable<boolean> {
     return this.isAuthenticated.asObservable();
   }
-
+  
+  
   private handleError(error: any) {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg); // log to console instead
     return throwError(errMsg);
+  }
+
+  signup(signupData: any, isAdmin: boolean): Observable<any> {
+    if(isAdmin) {
+      return this.http.post(`${this.baseUrl}/account/signupAdmin`, signupData);
+    }
+    return this.http.post(`${this.baseUrl}/account/signup`, signupData);
   }
 }

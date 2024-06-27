@@ -10,17 +10,30 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { TokenInterceptor } from './services/token-interceptor.service';
-import { UserListComponent } from './components/user-list/user-list.component';
+import { UserListComponent } from './components/users/user-list/user-list.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { EventsListComponent } from './components/events-list/events-list.component';
+import { UserDialogComponent } from './components/users/user-dialog/user-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UserListComponent
+    UserListComponent,
+    LayoutComponent,
+    SignupComponent,
+    EventsListComponent,
+    UserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +45,12 @@ import { UserListComponent } from './components/user-list/user-list.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [ 
     {

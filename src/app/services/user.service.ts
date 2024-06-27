@@ -7,7 +7,7 @@ import { User } from '../models/user';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'https://localhost:7279/api'; // Update this to your API
+  private baseUrl = 'https://localhost:12001/api'; // Update this to your API
 
     constructor(private http: HttpClient) { }
 
@@ -19,11 +19,15 @@ export class UserService {
       return this.http.get<User>(`${this.baseUrl}/User/GetUserById?userId=${id}`);
   }
 
-  updateUser(user: User): Observable<User> {
-      return this.http.put<User>(`${this.baseUrl}/User/UpdateUserProfile?userId=${user.id}`, user);
+  updateUser(id: string, user: User): Observable<any> {
+      return this.http.put<User>(`${this.baseUrl}/User/UpdateUserProfile?userId=${id}`, user);
   }
 
   deleteUser(id: string): Observable<any> {
       return this.http.delete(`${this.baseUrl}/User/DeleteUser?userId=${id}`);
+  }
+
+  createUser(user: User): Observable<any> {
+    return this.http.post<User>(`${this.baseUrl}/User/addUser`, user);
   }
 }

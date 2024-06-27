@@ -13,13 +13,18 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthService, private router: Router) {}
+    constructor(private authService: AuthService, private router: Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        // Check if the request is for the signup API
+        if (request.url.endsWith('/account/signup') || request.url.endsWith('/account/signupAdmin')) {
+            return next.handle(request);
+        }
+
         let currentUser = this.authService.currentUserValue;
         console.log(currentUser);
         if (currentUser && currentUser.token) {
