@@ -2,6 +2,9 @@
 
 Check if npm and angular installed before starting it.
 
+Navigate to folder : `cd CrossApplicationClient`
+Restore dependencies : `npm install`
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.3.
 
 ## Development server
